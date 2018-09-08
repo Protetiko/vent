@@ -22,9 +22,9 @@ gem 'vent'
 
 Vent.configure do |config|
   config.publishers = []
-    config.publishers << Vent::CommandLinePublisher if ENV['RACK_ENV'] == 'development'
-    config.publishers << Vent::HutchPublisher if ENV['RACK_ENV'] == 'production' || ENV['RACK_ENV'] == 'development'
-    config.publishers << Vent::WisperPublisher
+  config.publishers << Vent::CommandLinePublisher if ENV['RACK_ENV'] == 'development'
+  config.publishers << Vent::HutchPublisher if ENV['RACK_ENV'] == 'production' || ENV['RACK_ENV'] == 'development'
+  config.publishers << Vent::WisperPublisher
 end
 
 ```
@@ -87,9 +87,9 @@ It is possible to have different configuration in event classes:
 # Given this Vent configuration...
 Vent.configure do |config|
   config.publishers = []
-    config.publishers << Vent::CommandLinePublisher if ENV['RACK_ENV'] == 'development'
-    config.publishers << Vent::HutchPublisher if ENV['RACK_ENV'] == 'production' || ENV['RACK_ENV'] == 'development'
-    config.publishers << Vent::WisperPublisher
+  config.publishers << Vent::CommandLinePublisher if ENV['RACK_ENV'] == 'development'
+  config.publishers << Vent::HutchPublisher if ENV['RACK_ENV'] == 'production' || ENV['RACK_ENV'] == 'development'
+  config.publishers << Vent::WisperPublisher
 end
 
 # ... this class will still only publish to the command line
@@ -145,8 +145,8 @@ class UserRegistrationEvent
   event_id 'events.user.registered'
 
   configure do |config|
-	# Also store the user in redis for whatever reason...
-    config.publishers << [Vent::CommandLinePublisher]
+    # Also store the user in redis for whatever reason...
+    config.publishers << Vent::CommandLinePublisher
   end
 end
 
