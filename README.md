@@ -4,8 +4,8 @@ Vent makes it dead simple to handle event publishing throughout your application
 
 ## Todo
 
--[ ] Custom message validation
--[ ] Async publishing
+- Custom message validation
+- Async publishing
 
 ## Setup
 
