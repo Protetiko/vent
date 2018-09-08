@@ -106,56 +106,6 @@ UserRegisteredEvent.publish message: "This message only prints to stdout"
 => "This message only prints to stdout"
 ```
 
-### Creating Publisher adapters
-A publisher adapter only need to inherit from `Vent::Publisher` and implement `self.publish(routing_key, message)`. Thats all!
-
-Lets take a look at CommandLinePublisher:
-
-```ruby
-module Vent
-  class CommandLinePublisher < Vent::Publisher
-    def self.publish(routing_key, message)
-      puts "**** #{routing_key} : #{message}"
-    end
-  end
-end
-```
- 
-Now lets implement a new RedisPublisher that will store the `routing_key` and `message` in redis:
-
-```ruby
-require "redis"
-
-class RedisPublisher < Vent::Publisher
-  def self.redis
-	@redis ||= Redis.new #or put your redis config where ever
-  end
-
-  def self.publish(routing_key, message)
-	# for whatever reason, store some data into redis:
-
-	# If the message object has an ID, use it as key and store the rest of the message
-	id = message.delete(:id)
-    redis.set(id, message) if id
-  end
-end
-
-class UserRegistrationEvent
-  include Vent::Event
-  event_id 'events.user.registered'
-
-  configure do |config|
-    # Also store the user in redis for whatever reason...
-    config.publishers << Vent::CommandLinePublisher
-  end
-end
-
-UserRegisteredEvent.publish message: user.to_h
-
-redis = Redis.new
-redis.get(user[:id])
-```
-
 ### Asynchronoues event publishing
 
 ```ruby
@@ -235,4 +185,56 @@ end
 
 MyEvent.perform message: "This is Awesome!"
 # => "This is Awesome!"
+```
+
+
+### Creating Publisher adapters
+
+A publisher adapter only need to inherit from `Vent::Publisher` and implement `self.publish(routing_key, message)`. Thats all!
+
+Lets take a look at CommandLinePublisher:
+
+```ruby
+module Vent
+  class CommandLinePublisher < Vent::Publisher
+    def self.publish(routing_key, message)
+      puts "**** #{routing_key} : #{message}"
+    end
+  end
+end
+```
+ 
+Now lets implement a new RedisPublisher that will store the `routing_key` and `message` in redis:
+
+```ruby
+require "redis"
+
+class RedisPublisher < Vent::Publisher
+  def self.redis
+    @redis ||= Redis.new #or put your redis config where ever
+  end
+
+  def self.publish(routing_key, message)
+    # for whatever reason, store some data into redis:
+
+    # If the message object has an ID, use it as key and store the rest of the message
+    id = message.delete(:id)
+    redis.set(id, message) if id
+  end
+end
+
+class UserRegistrationEvent
+  include Vent::Event
+  event_id 'events.user.registered'
+
+  configure do |config|
+    # Also store the user in redis for whatever reason...
+    config.publishers << Vent::CommandLinePublisher
+  end
+end
+
+UserRegisteredEvent.publish message: user.to_h
+
+redis = Redis.new
+redis.get(user[:id])
 ```
