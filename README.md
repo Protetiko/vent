@@ -13,6 +13,8 @@ Vent makes it dead simple to handle event publishing throughout your application
 gem 'vent'
 ```
 
+Configure vent:
+
 ```ruby
 # config/initializers/vent.rb (or whatever)
 
