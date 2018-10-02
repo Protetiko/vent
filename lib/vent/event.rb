@@ -31,7 +31,7 @@ module Vent
         self.routing_key = event
       end
 
-      def perform(params = {})
+      def publish(params = {})
         key     = params.delete(:routing_key) || ''
         message = params.delete(:message)
 
