@@ -30,6 +30,8 @@
 # MyEvent.perform message: "This is Awesome!"
 # => "This is Awesome!"
 
+require 'sucker_punch'
+
 module Vent
   class WisperPublisher < Vent::Publisher
     include SuckerPunch::Job
