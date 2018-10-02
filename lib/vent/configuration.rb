@@ -11,7 +11,7 @@ module Vent
     def initialize
       @publishers = [ Vent::NullPublisher ]
       @async = false
-      @async_adapter = Vent::Async::SuckerPunch
+      #@async_adapter = Vent::Async::SuckerPunch
     end
   end
 end
