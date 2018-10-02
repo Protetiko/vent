@@ -57,14 +57,14 @@ It is possible to configure an event class with predefined routing key and messa
 # Predefine the routing key for this event
 class UserRegisteredEvent
   include Vent::Event
-  routing_key 'events.user.registered'
+  event_id 'events.user.registered'
 end
 
 UserRegisteredEvent.publish message: user.to_h
 
 # With message transformation
 class UserRegisteredEvent < Vent::Events:SimpleEvent # can also inherit from SimpleEvent
-  routing_key 'events.user.registered'
+  event_id 'events.user.registered'
 
   # The `message` method will be called if a message is not defined in the `publish` call
   def message(params = {})
