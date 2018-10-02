@@ -32,11 +32,11 @@ module Vent
       end
 
       def publish(params = {})
-        key     = params.delete(:routing_key) || ''
+        key     = params.delete(:routing_key) || nil
         message = params.delete(:message)
 
         event   = new
-        key     = event.routing_key      unless key
+        key     = key || event.routing_key
         message = event.message(params)  unless message
 
         configuration.publishers.each do |publisher|
