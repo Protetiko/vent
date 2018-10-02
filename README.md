@@ -1,6 +1,6 @@
 # Vent - the adaptabel publishing library
 
-Vent makes it dead simple to handle event publishing throughout your application. Vent use a adapter pattern to make it easily extendable with new publisher. The main concern of Vent is to connect event publishing with publisher adapters. Any transportation method is supported (given a publisher adapter is available), for example publishing to RabbitMQ, Log files and STDOUT. Multiple publishers are supported for events, so a message could be published from one place both to RabbitMQ, internally inside the application and the log file at the same time. Horray!
+Vent makes it dead simple to handle event publishing throughout your applications. Vent use a adapter pattern to make it easily extendable with new publisher. The main concern of Vent is to connect event publishing with publisher adapters. Any transportation method is supported (given a publisher adapter is available), for example publishing to RabbitMQ, Log files and STDOUT. Multiple publishers are supported for events, so a message could be published from one place both to RabbitMQ, internally inside the application and the log file at the same time. Horray!
 
 ## Todo
 
