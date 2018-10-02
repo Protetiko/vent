@@ -30,6 +30,7 @@
 # MyEvent.perform message: "This is Awesome!"
 # => "This is Awesome!"
 
+require 'wisper'
 require 'sucker_punch'
 
 module Vent
