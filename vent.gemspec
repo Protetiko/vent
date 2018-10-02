@@ -9,18 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["David Sennerlöv"]
   spec.email         = ["ndavidn@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
+  spec.summary       = %q{Dead simpe event publishing.}
+  spec.description   = %q{Vent makes it dead simple to handle event publishing throughout your applications. Vent use a adapter pattern to make it easily extendable with new publisher. The main concern of Vent is to connect event publishing with publisher adapters. Any transportation method is supported (given a publisher adapter is available), for example publishing to RabbitMQ, Log files and STDOUT. Multiple publishers are supported for events, so a message could be published from one place both to RabbitMQ, internally inside the application and the log file at the same time. Horray!}
+  spec.homepage      = "https://github.com/Protetiko/vent"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
