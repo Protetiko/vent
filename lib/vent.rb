@@ -11,11 +11,16 @@ require_relative 'vent/publishers/null_publisher'
 
 module Vent
   class << self
-    attr_accessor :configuration
-  end
+    attr_accessor :_configuration
 
-  def self.configure
-    self.configuration ||= Vent::Configuration.new
-    yield(configuration) if block_given?
+    def configure
+      yield(configuration) if block_given?
+    end
+
+    def configuration
+      self._configuration ||= Vent::Configuration.new
+    end
   end
 end
+
+require_relative 'vent/events/simple_event'

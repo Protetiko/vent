@@ -17,6 +17,10 @@ module Vent
   module Events
     class SimpleEvent
       include Vent::Event
+
+      def self.inherited(base)
+        base.configure
+      end
     end
   end
 end

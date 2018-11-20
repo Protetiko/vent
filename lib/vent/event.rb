@@ -24,7 +24,7 @@ module Vent
 
       def configure
         self.configuration ||= Vent.configuration.clone
-        yield(configuration) if block_given?
+        yield(self.configuration) if block_given?
       end
 
       def event_id(event)
