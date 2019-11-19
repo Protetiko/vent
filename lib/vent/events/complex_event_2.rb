@@ -4,7 +4,7 @@
 # the globally configured publishers to only the CommandLinePublisher
 #
 # usage:
-#   Vent::Events::ComplexEvent2.perform user.to_hash
+#   Vent::Events::ComplexEvent2.publish user.to_hash
 
 module Vent
   module Events

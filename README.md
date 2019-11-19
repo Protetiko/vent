@@ -133,7 +133,7 @@ Can also be configured for each Event class, to allow some events to publish asy
 Just drops the message and does nothing.
 
 ```ruby
-config.publishers << Vent::CommandLinePublisher
+config.publishers << Vent::NullPublisher
 ```
 
 ### Command line publisher
@@ -185,7 +185,7 @@ class MyListener
   end
 end
 
-MyEvent.perform message: "This is Awesome!"
+MyEvent.publish message: "This is Awesome!"
 # => "This is Awesome!"
 ```
 
@@ -240,3 +240,5 @@ UserRegisteredEvent.publish message: user.to_h
 redis = Redis.new
 redis.get(user[:id])
 ```
+
+### Test Helpers

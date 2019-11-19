@@ -27,7 +27,7 @@
 #   end
 # end
 #
-# MyEvent.perform message: "This is Awesome!"
+# MyEvent.publish message: "This is Awesome!"
 # => "This is Awesome!"
 
 require 'wisper'
@@ -41,10 +41,10 @@ module Vent
     MessageStruct = Struct.new(:routing_key, :body, :message_id, :timestamp)
 
     def self.publish(_routing_key, _message)
-      WisperPublisher.new.perform(key: _routing_key, message: _message)
+      WisperPublisher.new.publish(key: _routing_key, message: _message)
     end
 
-    def perform(key: nil, message: nil, **event)
+    def publish(key: nil, message: nil, **event)
       msg = MessageStruct.new(key, message, 'notimplemented', Time.now)
       broadcast(key, msg)
     end

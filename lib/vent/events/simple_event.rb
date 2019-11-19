@@ -8,7 +8,7 @@
 #
 # usage:
 #
-#   Vent::Events::SimpleEvent.perform(
+#   Vent::Events::SimpleEvent.publish(
 #     routing_key: 'events.update.user',
 #     message: user.to_hash
 #   )
