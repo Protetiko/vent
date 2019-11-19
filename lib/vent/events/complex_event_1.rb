@@ -6,7 +6,7 @@
 #
 # usage:
 #
-#   Vent::Events::ComplexEvent1.perform user.to_hash
+#   Vent::Events::ComplexEvent1.publish user.to_hash
 #
 #
 #

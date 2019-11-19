@@ -4,3 +4,5 @@ build:
 install:
 	gem install vent-*.gem
 
+fury:
+	git push fury master
