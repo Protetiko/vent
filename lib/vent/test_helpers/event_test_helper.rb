@@ -20,7 +20,7 @@ module TestHelpers
       event = Vent::TestPublisher.queue[key]&.pop
       refute_nil event
       assert_equal key, event[:routing_key]
-      yield(event) if block_given?
+      yield(event, event[:message]) if block_given?
     end
   end
 end
