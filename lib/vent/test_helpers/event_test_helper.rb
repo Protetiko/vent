@@ -17,8 +17,10 @@
 module TestHelpers
   module EventTestHelper
     def assert_event(key, &block)
+      key = key.routing_key if !key.is_a?(String) && key.include?(Vent::Event)
+
       event = Vent::TestPublisher.queue[key]&.pop
-      refute_nil event
+      refute nil == event, "Expected the event `#{key}` to have been published"
       assert_equal key, event[:routing_key]
       yield(event, event[:message]) if block_given?
     end
