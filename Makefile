@@ -6,3 +6,7 @@ install:
 
 fury:
 	git push fury master
+
+.PHONY: examples
+examples:
+	@bundle exec ruby examples/wisper.rb
