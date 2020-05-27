@@ -20,18 +20,20 @@ class EventMixinTest < MiniTest::Test
       config.publishers = all_publishers
     end
 
-    self.class.const_set :TestEvent1, Class.new {
-      include Vent::Event
-    }
+    self.class.const_set(:TestEvent1, Class.new {
+        include Vent::Event
+      }
+    )
     assert_equal all_publishers.size, TestEvent1.configuration.publishers.size
 
-    self.class.const_set :TestEvent2, Class.new {
-      include Vent::Event
+    self.class.const_set(:TestEvent2, Class.new {
+        include Vent::Event
 
-      configure do |config|
-        config.publishers = TWO_PUBLISHERS
-      end
-    }
+        configure do |config|
+          config.publishers = TWO_PUBLISHERS
+        end
+      }
+    )
     assert_equal TWO_PUBLISHERS.size, TestEvent2.configuration.publishers.size
   end
 end

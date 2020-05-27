@@ -34,13 +34,14 @@ class EventConfigurationTest < MiniTest::Test
   end
 
   def test_event_configuration
-    self.class.const_set :TestEvent1, Class.new {
-      include Vent::Event
+    self.class.const_set(:TestEvent1, Class.new {
+        include Vent::Event
 
-      configure do |config|
-        config.publishers = TWO_PUBLISHERS
-      end
-    }
+        configure do |config|
+          config.publishers = TWO_PUBLISHERS
+        end
+      }
+    )
     assert_equal TWO_PUBLISHERS.size, TestEvent1.configuration.publishers.size
   end
 
@@ -49,18 +50,20 @@ class EventConfigurationTest < MiniTest::Test
       config.publishers = []
     end
 
-    self.class.const_set :TestEvent2, Class.new {
-      include Vent::Event
-    }
+    self.class.const_set(:TestEvent2, Class.new {
+        include Vent::Event
+      }
+    )
 
     assert_equal 0, TestEvent2.configuration.publishers.size
 
     Vent.configure do |config|
       config.publishers = all_publishers
     end
-    self.class.const_set :TestEvent3, Class.new {
-      include Vent::Event
-    }
+    self.class.const_set(:TestEvent3, Class.new {
+        include Vent::Event
+      }
+    )
 
     assert_equal all_publishers.size, TestEvent3.configuration.publishers.size
   end
@@ -70,29 +73,32 @@ class EventConfigurationTest < MiniTest::Test
       config.publishers = all_publishers
     end
 
-    self.class.const_set :Event1, Class.new {
-      include Vent::Event
+    self.class.const_set(:Event1, Class.new {
+        include Vent::Event
 
-      configure do |config|
-        config.publishers = ONE_PUBLISHER
-      end
-    }
+        configure do |config|
+          config.publishers = ONE_PUBLISHER
+        end
+      }
+    )
 
-    self.class.const_set :Event2, Class.new {
-      include Vent::Event
+    self.class.const_set(:Event2, Class.new {
+        include Vent::Event
 
-      configure do |config|
-        config.publishers = TWO_PUBLISHERS
-      end
-    }
+        configure do |config|
+          config.publishers = TWO_PUBLISHERS
+        end
+      }
+    )
 
-    self.class.const_set :Event3, Class.new {
-      include Vent::Event
+    self.class.const_set(:Event3, Class.new {
+        include Vent::Event
 
-      configure do |config|
-        config.publishers = THREE_PUBLISHERS
-      end
-    }
+        configure do |config|
+          config.publishers = THREE_PUBLISHERS
+        end
+      }
+    )
 
     assert_equal all_publishers.size, Vent.configuration.publishers.size
     all_publishers.each_with_index do |p, i|

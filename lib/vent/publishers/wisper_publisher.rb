@@ -35,7 +35,7 @@ require 'sucker_punch'
 
 module Wisper
   class SuckerPunchBroadcaster
-    def broadcast(subscriber, publisher, event, args)
+    def broadcast(subscriber, _publisher, event, args)
       Wrapper.perform_async(subscriber, event, args)
     end
 
