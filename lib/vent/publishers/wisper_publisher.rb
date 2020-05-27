@@ -33,32 +33,42 @@
 require 'wisper'
 require 'sucker_punch'
 
-module Vent
-  class WisperPublisher < Vent::Publisher
-    include SuckerPunch::Job
-    include Wisper::Publisher
-
-    MessageStruct = Struct.new(:routing_key, :body, :message_id, :timestamp)
-
-    def self.publish(_routing_key, _message)
-      WisperPublisher.new.publish(key: _routing_key, message: _message)
+module Wisper
+  class SuckerPunchBroadcaster
+    def broadcast(subscriber, publisher, event, args)
+      Wrapper.perform_async(subscriber, event, args)
     end
 
-    def publish(key: nil, message: nil, **event)
-      msg = MessageStruct.new(key, message, 'notimplemented', Time.now)
-      broadcast(key, msg)
+    class Wrapper
+      include SuckerPunch::Job
+
+      def perform(subscriber, event, args)
+        subscriber.public_send(event, *args)
+      end
+    end
+
+    def self.register
+      Wisper.configure do |config|
+        config.broadcaster :sucker_punch, SuckerPunchBroadcaster.new
+        config.broadcaster :async,        SuckerPunchBroadcaster.new
+      end
     end
   end
 end
 
+Wisper::SuckerPunchBroadcaster.register
+
 module Vent
-  module WisperListener
-    def register(event, method)
-      Vent::WisperPublisher.subscribe(
-        self.new,
-        on:   event,
-        with: method
-      )
+  class WisperPublisher < Vent::Publisher
+    class << self
+      include Wisper::Publisher
+
+      MessageStruct = Struct.new(:routing_key, :body, :message_id, :timestamp)
+
+      def publish(routing_key, message)
+        msg = MessageStruct.new(routing_key, message, 'notimplemented', Time.now)
+        broadcast(routing_key, msg)
+      end
     end
   end
 end
