@@ -37,7 +37,7 @@ module Vent
 
         event   = new
         key     = key || event.routing_key
-        message = event.message(params)  unless message
+        message = event.message(**params)  unless message
 
         configuration.publishers.each do |publisher|
           publisher.publish(key, message)
