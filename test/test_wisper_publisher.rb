@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class WisperPublisherTest < MiniTest::Test
 
   class TestEvent
@@ -6,7 +8,7 @@ class WisperPublisherTest < MiniTest::Test
     configure do |config|
       config.publishers = []
       config.publishers << Vent::WisperPublisher
-      puts  config.publishers
+      # puts config.publishers
     end
 
     def self.inherited(base)
@@ -25,7 +27,7 @@ class WisperPublisherTest < MiniTest::Test
   class DeleteEvent < TestEvent; event_id 'deleted'; end
 
   class TestListener
-    extend(Vent::WisperListener)
+    extend Vent::WisperListener
     def self.events
       @@events ||= []
     end
@@ -40,11 +42,11 @@ class WisperPublisherTest < MiniTest::Test
     register 'created', :handle, async: false
   end
 
-  class CreateListener < TestListener
+  class UpdateListener < TestListener
     register 'updated', :handle, async: false
   end
 
-  class CreateListener < TestListener
+  class DeleteListener < TestListener
     register 'deleted', :handle, async: false
   end
 

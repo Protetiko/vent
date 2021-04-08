@@ -20,11 +20,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.16"
+  spec.add_development_dependency "bundler", "~> 2.1.4"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "minitest-reporters", "~> 1.3.5"
 
-  spec.add_runtime_dependency "sucker_punch", "~> 2.1"
-  spec.add_runtime_dependency "wisper", "2.0.0.rc1"
+  spec.add_runtime_dependency "sucker_punch", "~> 3.0.1"
+  spec.add_runtime_dependency "wisper", "~> 2.0.0"
 end
